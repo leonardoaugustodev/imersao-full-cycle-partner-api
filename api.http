@@ -1,0 +1,100 @@
+###
+# @name findOneEvent
+GET http://localhost:3000/events
+X-Api-Token: 123
+
+###
+# @name createEvent
+POST http://localhost:3000/events
+Content-Type: application/json
+X-Api-Token: 123
+
+{
+    "name": "This is a event with a very looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong naaaaaaaaaaaaaaaaame",
+    "description": "This is a new event",
+    "date": "2020-01-01T00:00:00T",
+    "price": -10
+}
+
+###
+@eventId = {{createEvent.response.body.id}}
+
+###
+GET http://localhost:3000/events/{{eventId}}
+X-Api-Token: 123
+
+###
+PATCH http://localhost:3000/events/{{eventId}}
+Content-Type: application/json
+X-Api-Token: 123
+
+{
+    "name": "New Event 1",
+    "description": "This is a new event",
+    "date": "2020-01-01T00:00:00Z",
+    "price": 100
+}
+
+###
+DELETE http://localhost:3000/events/{{eventId}}
+X-Api-Token: 123
+
+###
+GET http://localhost:3000/events
+X-Api-Token: 123
+
+###
+# @name findAllSpots
+GET http://localhost:3000/events/{{eventId}}/spots
+X-Api-Token: 123
+
+
+###
+# @name createSpot
+POST http://localhost:3000/events/{{eventId}}/spots
+Content-Type: application/json
+X-Api-Token: 123
+
+{
+    "name": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+}
+
+
+### 
+@spotName = {{ createSpot.response.body.name }}
+@spotId = {{createSpot.response.body.id}}
+
+
+###
+# @name findOneSpot
+GET http://localhost:3000/events/{{eventId}}/spots/{{spotId}}
+X-Api-Token: 123
+
+
+###
+# @name reserveSpot
+POST http://localhost:3000/events/{{eventId}}/reserve
+Content-Type: application/json
+X-Api-Token: 123
+
+{
+    "spots": ["{{spotName}}"],
+    "ticket_kind": "full",
+    "email": "test@test.com"
+}
+
+
+###
+PATCH http://localhost:3000/events/{{eventId}}/spots/{{spotId}}
+Content-Type: application/json
+X-Api-Token: 123
+
+{
+    "name": "A2"
+}
+
+###
+DELETE http://localhost:3000/events/{{eventId}}/spots/clxjrwaci000910un5hlog6a3
+X-Api-Token: 123
+
+
